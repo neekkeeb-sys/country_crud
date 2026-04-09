@@ -12,3 +12,4 @@ class Country extends Model
         'continent'
     ];
 }
+ 

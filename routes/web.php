@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CountryController;
-
+use App\Http\Controllers\Auth\LoginController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,3 +24,19 @@ Route::put('/country/{country}', [CountryController::class, 'update'])->name('co
 Route::delete('/country/{country}', [CountryController::class, 'destroy'])->name('country.destroy');
 /* Edit form */
 Route::get('/country/{country}/edit', [CountryController::class, 'edit'])->name('country.edit');
+
+
+// Login Routes
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
+
+// Logout Route
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+
+// Protected Dashboard
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
